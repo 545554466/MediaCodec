@@ -1,4 +1,4 @@
-package com.jiangjun.videodemo.utils
+package com.jiangjun.videodemo.recordscreen
 
 import android.hardware.display.DisplayManager
 import android.media.MediaCodec
@@ -6,12 +6,14 @@ import android.media.MediaCodecInfo
 import android.media.MediaFormat
 import android.media.projection.MediaProjection
 import android.view.Surface
+import com.jiangjun.videodemo.utils.FileUtils
 import java.nio.ByteBuffer
 
 /**
  *编码 工具类
  **/
-class H264Encoder(mMediaProjection: MediaProjection, width: Int, height: Int) : Thread() {
+class H264RSEncoder(mMediaProjection: MediaProjection, width: Int, height: Int) : Thread() {
+
     // mMediaProjection 数据源在mMediaProjection拿
     // 创建编码器
     private var mediaCodec: MediaCodec =
@@ -53,7 +55,8 @@ class H264Encoder(mMediaProjection: MediaProjection, width: Int, height: Int) : 
     override fun run() {
         //开启编码器
         mediaCodec.start()
-        // 获取编码好的数据
+        // 因为mMediaProjection内部已经做好了文件的输入，所以可以直接
+        //  获取编码好的数据
         val info: MediaCodec.BufferInfo = MediaCodec.BufferInfo()
         while (true) {
             // 获取输出缓存 要传入个buffer 保存数据  10000等待的时长
@@ -68,7 +71,7 @@ class H264Encoder(mMediaProjection: MediaProjection, width: Int, height: Int) : 
                 FileUtils.writeBytes(ba)
                 FileUtils.writeContent(ba)
                 // 如果之前配置了surface 则传true， 我们解码没有配置surface 上面的只是虚拟的并不是我们自己创建的所以传false
-                mediaCodec.releaseOutputBuffer(outIndex,false)
+                mediaCodec.releaseOutputBuffer(outIndex, false)
             }
         }
     }

@@ -12,8 +12,10 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.jiangjun.videodemo.R
-import com.jiangjun.videodemo.utils.H264Encoder
 
+/**
+ * 录屏
+ */
 class RecordScreenActivity : AppCompatActivity(), View.OnClickListener {
     private var mMediaProjectionManager: MediaProjectionManager? = null
     private var btn: Button? = null
@@ -62,7 +64,8 @@ class RecordScreenActivity : AppCompatActivity(), View.OnClickListener {
             //获取录屏工具
             var mMediaProjection: MediaProjection? =
                 mMediaProjectionManager?.getMediaProjection(resultCode, data)
-            var h264Encoder = mMediaProjection?.let { H264Encoder(it, 640, 1920) }
+            var h264Encoder = mMediaProjection?.let { H264RSEncoder(it, 640, 1920) }
+
             h264Encoder?.start()
         }
     }

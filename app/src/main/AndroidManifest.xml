@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".recordscreen.RecordScreenActivity"/>
+        <activity android:name=".camera.CameraActivity"/>
     </application>
 
 </manifest>
