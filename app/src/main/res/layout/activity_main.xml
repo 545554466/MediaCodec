@@ -10,10 +10,19 @@
         android:id="@+id/btn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="录屏"
+        android:text="开启服务端接受投屏"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn1_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开启客户端请求投屏"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn1"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/btn2"
@@ -21,7 +30,16 @@
         android:layout_height="wrap_content"
         android:text="开启摄像头"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn1"
+        app:layout_constraintTop_toBottomOf="@+id/btn1_1"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/btnIP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取IP地址，宽高"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn2"
         app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

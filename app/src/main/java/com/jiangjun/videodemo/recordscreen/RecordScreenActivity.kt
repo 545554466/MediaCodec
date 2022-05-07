@@ -3,6 +3,7 @@ package com.jiangjun.videodemo.recordscreen
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.MediaFormat
 import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
 import android.os.Build
@@ -12,13 +13,15 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.jiangjun.videodemo.R
+import com.jiangjun.videodemo.socket.SocketLive
 
 /**
  * 录屏
  */
 class RecordScreenActivity : AppCompatActivity(), View.OnClickListener {
-    private var mMediaProjectionManager: MediaProjectionManager? = null
+    private lateinit var mMediaProjectionManager: MediaProjectionManager
     private var btn: Button? = null
+    private val TAG: String = "Record"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record_screen)
@@ -39,7 +42,7 @@ class RecordScreenActivity : AppCompatActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.btn -> start()
             else -> {
-                Log.d("video", " ------- ")
+                Log.d(TAG, " ------- ")
             }
         }
     }
@@ -49,7 +52,7 @@ class RecordScreenActivity : AppCompatActivity(), View.OnClickListener {
         mMediaProjectionManager =
             getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
 
-        val captureIntent: Intent? = mMediaProjectionManager!!.createScreenCaptureIntent()
+        val captureIntent: Intent = mMediaProjectionManager.createScreenCaptureIntent()
 
 
         startActivityForResult(captureIntent, 1)
@@ -62,11 +65,10 @@ class RecordScreenActivity : AppCompatActivity(), View.OnClickListener {
 
         if (data != null) {
             //获取录屏工具
-            var mMediaProjection: MediaProjection? =
-                mMediaProjectionManager?.getMediaProjection(resultCode, data)
-            var h264Encoder = mMediaProjection?.let { H264RSEncoder(it, 640, 1920) }
-
-            h264Encoder?.start()
+            val mMediaProjection: MediaProjection =
+                mMediaProjectionManager.getMediaProjection(resultCode, data)
+            var socketLive = SocketLive(mMediaProjection)
+            socketLive.start()
         }
     }
 
