@@ -95,12 +95,14 @@ class H264RSEncoder(
     }
 
     fun dealFrame(bb: ByteBuffer?, info: MediaCodec.BufferInfo) {
+        // 分隔符有两种 00 00 00 01 和 00 00 01
         var offset = 4
         if (bb?.get(2)?.toInt() == 0x01) {
             offset = 3
         }
         Log.d(TAG, "偏移量 --》 $offset")
-
+        // 当 值为 H264_CONFIGURATION_PICTURE 或者 H265_CONFIGURATION_PICTURE 就代表是配置帧，因为配置帧只会编码一次
+        //所以需要保存好，当有I帧时，手动在I帧前塞入配置帧，以确保播放正常播放画面；
         when (getPictureType(bb, offset)) {
             H264_CONFIGURATION_PICTURE -> {
                 H264_SPS_BYTE = ByteArray(info.size)
@@ -127,6 +129,7 @@ class H264RSEncoder(
                 socketLive.sendDara(newByte)
             }
             else -> {
+                // 非I帧与非配置帧，走这里
                 val byte = ByteArray(info.size)
                 bb?.get(byte)
                 socketLive.sendDara(byte)
@@ -135,10 +138,13 @@ class H264RSEncoder(
     }
 
     fun getPictureType(bb: ByteBuffer?, offset: Int): Int {
+        //获取帧类型，h264 h265 帧类型不同所以需要区分
         if (null != bb) {
             if (VIDEO_TYPE == MediaFormat.MIMETYPE_VIDEO_AVC) {
+                //h264 获取帧类型
                 return ((bb.get(offset)) and 0x1f).toInt()
             } else if (VIDEO_TYPE == MediaFormat.MIMETYPE_VIDEO_HEVC) {
+                //h265 获取帧类型
                 return ((bb.get(offset)) and 0x7e.shr(1)).toInt()
             }
         }
