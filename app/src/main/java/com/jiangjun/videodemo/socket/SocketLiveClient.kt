@@ -15,7 +15,7 @@ class SocketLiveClient(var socketCallback: SocketCallback, var port: Int) {
     }
 
     fun start() {
-        Log.d(TAG, "start: url  =====   ws://10.10.64.162:$port")
+        Log.d(TAG, "start: url  =====   ws://10.10.64.156:$port")
         //设置需要链接的服务器ip地址
         val uri = URI("ws://10.10.64.162:$port")
         val socketClient = SocketClient(uri)

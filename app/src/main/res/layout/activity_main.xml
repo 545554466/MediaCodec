@@ -34,12 +34,30 @@
         app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="多人会议-请求"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn1_1"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="多人会议-接收"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn3"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
         android:id="@+id/btnIP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="获取IP地址，宽高"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn2"
+        app:layout_constraintTop_toBottomOf="@+id/btn4"
         app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

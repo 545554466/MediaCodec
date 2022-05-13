@@ -4,6 +4,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +22,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".recordscreen.RecordScreenActivity"/>
+        <activity android:name=".recordscreentoupin.RecordScreenTouPinActivity"/>
         <activity android:name=".camera.CameraActivity"/>
+        <activity android:name=".multiplayervideo.send.SendVideoSendActivity"/>
+        <activity android:name=".multiplayervideo.accept.AcceptVideoActivity"/>
     </application>
 
 </manifest>

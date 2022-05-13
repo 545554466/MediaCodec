@@ -14,7 +14,7 @@ public class FileUtils {
         FileOutputStream writer = null;
         try {
             // 打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件
-            writer = new FileOutputStream(Environment.getExternalStorageDirectory() + "/codec.h264", true);
+            writer = new FileOutputStream(Environment.getExternalStorageDirectory() + "/codec.pcm", true);
             writer.write(array);
             writer.write('\n');
 

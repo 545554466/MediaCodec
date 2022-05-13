@@ -20,5 +20,9 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("com.jiangjun.videodemo", appContext.packageName)
+
+        for (i in 10 downTo 0){
+            System.out.println(" ii   ==  $i")
+        }
     }
 }
